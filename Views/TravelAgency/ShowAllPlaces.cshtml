@@ -1,0 +1,111 @@
+﻿@model List<TravelAgency>
+@using Newtonsoft.Json;
+<partial name="MapPartialView" model="Model" />
+<script>
+    var myModel = @Html.Raw(JsonConvert.SerializeObject(Model));
+	
+    let place = creatFeatures(myModel, "rgba(241, 245, 39)", "Travel Agancy")
+
+    map.addLayer(place);
+	creatLayerListHandelCheckBox(map);
+</script>
+
+	@foreach (TravelAgency agancy in Model)
+	{
+		
+			<div class="card ">
+				<img src='~/Images/@agancy.Image' height="560">
+				<div class="text-white"><p>@agancy.Name
+						<a id="anc" class="btn-primary" type="button" href="@agancy.Url"><span>Website</span></a>
+						<div class="rating">
+							@for (int i = 0; i < agancy.Rate; i++)
+							{
+								<span class="fa fa-star checked" style="color:gold"></span>
+
+							}
+							@for (int i = agancy.Rate; i < 5; i++)
+							{
+								<span class="fa fa-star"></span>
+
+							}
+						</div>
+				</div>
+				
+			
+			</div>
+			
+	
+	}
+	
+
+
+
+<style>
+  
+
+
+
+.Pb-3{
+	width:100%
+}
+.card{
+	display:inline-block;
+	width: 350px;
+	border: none;
+	border-radius: 12px;
+	position: relative;
+	
+}
+
+img{
+		width: 350px;
+	border-radius: 12px;
+}
+div.text-white{
+	position: absolute;
+	top: 55%;
+	left: 10%;
+	right: 10%;
+	font-size: 28px;
+
+	
+}
+div.text-muted{
+	position: absolute;
+	top: 70%;
+	left: 10%;
+	right: 12%;
+	font-size: 14px;
+	color: #adb5bd!important;
+}
+
+
+.btn-primary{
+	background: #616BCC;
+	border: none;
+	border-radius: 7px;
+	padding: 15px;
+		position: absolute;
+		top: 105%;
+		right:50%;
+
+	
+		text-decoration: none;
+	
+}
+.btn-primary:hover{
+	background: #616BCC;
+}
+.btn-primary:focus{
+	box-shadow: none;
+}
+
+div.text-white{
+		position: absolute;
+		top: 60%;
+		line-height: 30px;
+}
+
+
+	
+</style>

@@ -1,0 +1,171 @@
+﻿@using EgyptTouristWebSite.ViewModel
+@model ServicesViewModel
+
+
+
+
+    <div class="p-5 bg-light" style="display:flex">
+        <div class="p-5 bg-light">
+            <h1 class="mb-3">Services</h1>
+            <h4 class="mb-3">I am Looking for ..</h4>
+        </div>
+        
+        <div class="list-group" style="width:100%">
+            <a href="#Bank-slider" class="list-group-item list-group-item-action">Bank</a>
+            <a href="#Embassy-slider" class="list-group-item list-group-item-action">Embassy</a>
+            <a href="#Mall-slider" class="list-group-item list-group-item-action">Mall</a>
+            <a href="#Restaurant-slider" class="list-group-item list-group-item-action">Restaurant</a>
+        </div>
+    </div>
+@foreach (var serviceList in Model.services)
+{
+    <div class="container" id="@serviceList[0].Type.Type-slider">
+        <h2>@serviceList[0].Type.Type</h2>
+        <div class="slider-container">
+            <div class="slider" >
+                @foreach (var service in serviceList)
+                {
+                    <div class="card">
+                        <img src="/Images/@service.Image" alt="@service.Name">
+                        <div class="card-body">
+                            <h4>@service.Name</h4>
+                            <p>@service.Description</p>
+                            <div class="rating">
+                                @for (int i = 0; i < service.Rate; i++)
+                                {
+                                    <span class="fa fa-star checked" style="color:gold"></span>
+                                }
+                                @for (int i = service.Rate; i < 5; i++)
+                                {
+                                    <span class="fa fa-star"></span>
+                                }
+                            </div>
+                            <a href="@Url.Action("Details", "Service", new { id = service.Id })" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn slider-prev-btn" data-slider="#@serviceList[0].Type.Type-slider"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn slider-next-btn" data-slider="#@serviceList[0].Type.Type-slider"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="location.href='@Url.Action("ShowservicesByCategory", "Service", new { category = @serviceList[0].Type.Type })'">View All</button>
+    </div>
+}
+
+@section Scripts{
+    <style>
+        .slider-container {
+            position: relative;
+        }
+
+        .slider {
+            overflow-x: scroll;
+            white-space: nowrap;
+            transition: 0.5s ease-in-out;
+        }
+
+            .slider::-webkit-scrollbar {
+                display: none; /* Add this to remove the scroll bar */
+            }
+
+            .slider .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                border-radius: 5px;
+                width: 250px;
+                margin: 10px;
+                display: inline-block;
+            }
+
+                .slider .card:hover {
+                    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+                }
+
+                .slider .card img {
+                    border-radius: 5px 5px 0 0;
+                    width: 100%;
+                    height: 150px;
+                    object-fit: cover;
+                }
+
+                .slider .card .card-body {
+                    padding: 10px;
+                }
+
+        .slider-controls {
+            display: block;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 5;
+        }
+
+        .slider-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+            .slider-btn:hover {
+                color: #ccc;
+            }
+
+        .slider-prev-btn {
+            color: gold;
+            margin-left: 10px;
+        }
+
+        .slider-next-btn {
+            color: gold;
+            margin-right: 10px;
+        }
+    </style>
+
+    <script>
+        const sliders = document.querySelectorAll('.slider');
+
+        sliders.forEach(slider => {
+            const prevBtn = slider.parentElement.querySelector('.slider-prev-btn');
+            const nextBtn = slider.parentElement.querySelector('.slider-next-btn');
+
+            let scrollAmount = 0;
+            const cardWidth = slider.querySelector('.card').offsetWidth + 20;
+            const cardsDisplayed = Math.floor(slider.offsetWidth / cardWidth);
+            const totalCards = slider.querySelectorAll('.card').length;
+
+            // Show prev and next buttons only if more cards than displayed
+            if (totalCards > cardsDisplayed) {
+                prevBtn.style.display = 'block';
+                nextBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+            }
+
+            // Prev and next butns functionality
+            prevBtn.addEventListener('click', () => {
+                if (scrollAmount !== 0) {
+                    scrollAmount += cardWidth;
+                    slider.scrollBy({ left: `-${cardWidth}`, behavior: "smooth" });
+                }
+            });
+
+            nextBtn.addEventListener('click', () => {
+                if (scrollAmount !== (slider.scrollWidth - slider.offsetWidth)) {
+                    scrollAmount += cardWidth;
+                    slider.scrollBy({ left: `${cardWidth}`, behavior: "smooth" });
+                    console.log(cardWidth);
+                }
+            });
+
+            slider.addEventListener('scroll', () => {
+                scrollAmount = slider.scrollLeft;
+            });
+        });
+    </script>
+}

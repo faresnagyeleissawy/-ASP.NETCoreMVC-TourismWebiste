@@ -1,0 +1,39 @@
+﻿@model InterestingPlace
+@using Newtonsoft.Json;
+<partial name="MapPartialView" model="Model" />
+<script>
+    var myModel = @Html.Raw(JsonConvert.SerializeObject(Model));
+    let data = [myModel];
+    let place = creatFeatures(data, "rgba(241, 245, 39, 1)", "placesReligious")
+    map.addLayer(place);
+</script>
+<div class="row">
+    <div class="col-md-6">
+        <img class="img-fluid" src="/Images/@Model.Image" alt="@Model.Name">
+    </div>
+    <div class="col-md-6">
+        <h1>@Model.Name</h1>
+        <p>@Model.Description</p>
+        <dl class="row">
+            <dt class="col-sm-3">Type:</dt>
+            <dd class="col-sm-9">@Model.Type.Type</dd>
+            <dt class="col-sm-3">Coordinates:</dt>
+            <dd class="col-sm-9">X: @Model.X, Y: @Model.Y</dd>
+            <dt class="col-sm-3">Website:</dt>
+            <dd class="col-sm-9"><a href="@Model.Website">@Model.Website</a></dd>
+            <dt class="col-sm-3">Rate:</dt>
+            <dd class="col-sm-9">
+                <div class="rating">
+                    @for (int i = 0; i < Model.Rate; i++)
+                    {
+                        <span class="fa fa-star checked" style="color:gold"></span>
+                    }
+                    @for (int i = Model.Rate; i < 5; i++)
+                    {
+                        <span class="fa fa-star"></span>
+                    }
+                </div>
+            </dd>
+        </dl>
+    </div>
+</div>

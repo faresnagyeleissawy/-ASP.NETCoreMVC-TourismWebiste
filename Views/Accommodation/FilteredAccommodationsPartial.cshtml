@@ -1,0 +1,72 @@
+﻿@using Newtonsoft.Json;
+@model List<Accommodation>
+
+
+<h1>Filter Results</h1>
+
+ <script>
+     //script to handel the filtered data 
+    var accommodations = @Html.Raw(JsonConvert.SerializeObject(Model));
+   // var layers = [...map.getLayers().getArray()]
+    console.log(accommodations);
+     labels = document.querySelectorAll('.layers label');
+    labels.forEach(label => {
+     label.remove();
+});
+
+
+    for (let i = 0; i < accommodations.length; i++) {
+        const typeId = accommodations[i].TypeId;
+      if (typeId === 1) {
+        hoteldata.push(accommodations[i]);
+      } else if (typeId === 2) {
+        resortdata.push(accommodations[i]);
+      } else if (typeId === 3) {
+        moteldata.push(accommodations[i]);
+      }
+    }
+    if (hoteldata.length > 0) {
+      
+        map.addLayer(creatFeatures(hoteldata, "rgba(39, 65, 245, 1)", "Hotel Filtered"));
+    }
+    if (resortdata.length > 0) { 
+       
+            map.addLayer(creatFeatures(resortdata, "rgba(39, 184, 255, 0.69)", "Resort Filtered"));
+    }
+    if (moteldata.length > 0) {
+        
+            map.addLayer(creatFeatures(moteldata, "rgba(99, 245, 39, 1)", "motel Filtered"));
+    
+    }
+    creatLayerListHandelCheckBox(map);
+    hoteldata=[];
+    resortdata=[];
+    moteldata=[];
+ </script>
+ <div>
+    @foreach (var place in Model)
+    {
+        <div class="col-md-3 mb-4" style="display:inline-block">
+            <div class="card">
+                <img class="card-img-top" src="/Images/@place.Image" alt="@place.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@place.Name</h5>
+                    <p class="card-text">@place.Description</p>
+                    <p class="card-text">@place.Type.Type</p>
+                    <p class="card-text">@place.Price</p>
+                    <div class="rating">
+                        @for (int i = 0; i < place.Rate; i++)
+                        {
+                            <span class="fa fa-star checked" style="color:gold"></span>
+                        }
+                        @for (int i = place.Rate; i < 5; i++)
+                        {
+                            <span class="fa fa-star"></span>
+                        }
+                    </div>
+                    <a href="@Url.Action("Details", "Accomodation", new { id = place.Id })" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
