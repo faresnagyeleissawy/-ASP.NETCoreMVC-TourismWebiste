@@ -16,10 +16,10 @@ namespace EgyptTouristWebSite.Controllers
             return View(Allagency);
         }
 
-        public IActionResult SearchById(int id)
+        public IActionResult Details(int id)
         {
             var agency = TravelAgencyRepo.GetById(id);
-            return View();
+            return View(agency);
         }
 
         public IActionResult Delete(int id)

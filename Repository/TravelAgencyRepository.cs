@@ -27,7 +27,7 @@ namespace EgyptTouristWebSite.Repository
 
         public TravelAgency GetById(int id)
         {
-            throw new NotImplementedException();
+            return context.TravelAgencies.FirstOrDefault(e => e.Id == id);
         }
     }
 }

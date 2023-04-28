@@ -6,10 +6,10 @@
 
 <script>
     var myModel = @Html.Raw(JsonConvert.SerializeObject(Model));
-    let placesCulturalLayer = creatFeatures(myModel.placesList[0], "rgba(39, 65, 245, 1)", "Cultural")
-    let placesLeisure = creatFeatures(myModel.placesList[1], "rgba(39, 184, 255, 0.69)", "Leisure")
-    let placesMedical = creatFeatures(myModel.placesList[2], "rgba(99, 245, 39, 1)", "Medical")
-    let placesReligious = creatFeatures(myModel.placesList[3], "rgba(241, 245, 39, 1)", "Religious")
+    let placesCulturalLayer = creatFeatures(myModel.placesList[0], "placeholder.png", "Cultural")
+    let placesLeisure = creatFeatures(myModel.placesList[1], "orange.png", "Leisure")
+    let placesMedical = creatFeatures(myModel.placesList[2], "blue.png", "Medical")
+    let placesReligious = creatFeatures(myModel.placesList[3], "green.png", "Religious")
     map.addLayer(placesCulturalLayer);
     map.addLayer(placesLeisure);
     map.addLayer(placesMedical);

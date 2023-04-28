@@ -17,12 +17,32 @@
       "PackagePath": "staticwebassets\\Images\\Hotel.png"
     },
     {
+      "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\blue.png",
+      "PackagePath": "staticwebassets\\Images\\blue.png"
+    },
+    {
       "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\cairo.jfif",
       "PackagePath": "staticwebassets\\Images\\cairo.jfif"
     },
     {
+      "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\google-maps.png",
+      "PackagePath": "staticwebassets\\Images\\google-maps.png"
+    },
+    {
+      "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\green.png",
+      "PackagePath": "staticwebassets\\Images\\green.png"
+    },
+    {
       "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\mouseclickpin.png",
       "PackagePath": "staticwebassets\\Images\\mouseclickpin.png"
+    },
+    {
+      "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\orange.png",
+      "PackagePath": "staticwebassets\\Images\\orange.png"
+    },
+    {
+      "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\placeholder.png",
+      "PackagePath": "staticwebassets\\Images\\placeholder.png"
     },
     {
       "Id": "E:\\backup\\iti\\MVC\\project\\project\\wwwroot\\Images\\travel-1.png",

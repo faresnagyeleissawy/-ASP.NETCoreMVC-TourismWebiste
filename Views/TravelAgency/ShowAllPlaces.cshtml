@@ -1,10 +1,14 @@
 ﻿@model List<TravelAgency>
 @using Newtonsoft.Json;
+<script>
+	var url = "TravelAgency/Details/"
+</script>
 <partial name="MapPartialView" model="Model" />
 <script>
+
     var myModel = @Html.Raw(JsonConvert.SerializeObject(Model));
-	
-    let place = creatFeatures(myModel, "rgba(241, 245, 39)", "Travel Agancy")
+
+	let place = creatFeatures(myModel, "placeholder.png", "Travel Agancy")
 
     map.addLayer(place);
 	creatLayerListHandelCheckBox(map);
@@ -16,7 +20,7 @@
 			<div class="card ">
 				<img src='~/Images/@agancy.Image' height="560">
 				<div class="text-white"><p>@agancy.Name
-						<a id="anc" class="btn-primary" type="button" href="@agancy.Url"><span>Website</span></a>
+					
 						<div class="rating">
 							@for (int i = 0; i < agancy.Rate; i++)
 							{
@@ -29,6 +33,8 @@
 
 							}
 						</div>
+				<a id ="det" href="@Url.Action("Details", "TravelAgency", new { id = agancy.Id })" class="btn-primary" type="button">Details</a>
+				<a id="anc" class="btn-primary" type="button" href="@agancy.Url"><span>Website</span></a>
 				</div>
 				
 			
@@ -79,33 +85,15 @@ div.text-muted{
 	color: #adb5bd!important;
 }
 
-
-.btn-primary{
-	background: #616BCC;
-	border: none;
-	border-radius: 7px;
-	padding: 15px;
-		position: absolute;
-		top: 105%;
-		right:50%;
-
-	
-		text-decoration: none;
-	
+#anc{
+position: absolute;
+top: 105%;
+right:50%;
 }
-.btn-primary:hover{
-	background: #616BCC;
+#det{
+	position: absolute;
+	top: 105%;
+	right: 0%;
 }
-.btn-primary:focus{
-	box-shadow: none;
-}
-
-div.text-white{
-		position: absolute;
-		top: 60%;
-		line-height: 30px;
-}
-
-
 	
 </style>

@@ -97,13 +97,14 @@
     let hoteldata = [];
     let resortdata = [];
     let moteldata = [];
+    
 </script>
 <partial name="MapPartialView" model="Model" />
   <script>
     var myModel = @Html.Raw(JsonConvert.SerializeObject(Model));
-        let hotels = creatFeatures(myModel.accsList[0], "rgba(39, 65, 245, 1)", "Hotel")
-        let resorts = creatFeatures(myModel.accsList[1], "rgba(39, 184, 255, 0.69)", "Resort")
-        let motels = creatFeatures(myModel.accsList[2], "rgba(99, 245, 39, 1)", "Motel")
+    let hotels = creatFeatures(myModel.accsList[0], "placeholder.png", "Hotel")
+        let resorts = creatFeatures(myModel.accsList[1], "blue.png", "Resort")
+        let motels = creatFeatures(myModel.accsList[2], "orange.png", "Motel")
 
         map.addLayer(hotels);
         map.addLayer(resorts);

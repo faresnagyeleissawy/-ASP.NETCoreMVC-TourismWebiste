@@ -27,15 +27,15 @@
     }
     if (hoteldata.length > 0) {
       
-        map.addLayer(creatFeatures(hoteldata, "rgba(39, 65, 245, 1)", "Hotel Filtered"));
+        map.addLayer(creatFeatures(hoteldata, "placeholder.png", "Hotel Filtered"));
     }
     if (resortdata.length > 0) { 
        
-            map.addLayer(creatFeatures(resortdata, "rgba(39, 184, 255, 0.69)", "Resort Filtered"));
+            map.addLayer(creatFeatures(resortdata, "orange.png", "Resort Filtered"));
     }
     if (moteldata.length > 0) {
         
-            map.addLayer(creatFeatures(moteldata, "rgba(99, 245, 39, 1)", "motel Filtered"));
+            map.addLayer(creatFeatures(moteldata, "blue.png", "motel Filtered"));
     
     }
     creatLayerListHandelCheckBox(map);

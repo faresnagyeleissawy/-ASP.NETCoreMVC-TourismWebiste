@@ -7,8 +7,8 @@ function CreateMap() {
             .extend([new ol.control.FullScreen()]),
         target: "map",
         view: new ol.View({
-            center: [3600000, 3000000],
-            zoom: 5,
+            center: [3479661, 3502237],
+            zoom: 12,
         }),
         layers: [],
     });
@@ -32,9 +32,10 @@ function changebasemap(map) {
         title: "Esri",
         layerName: "ESRIbase",
     });
-    map.addLayer(osmLayer);
+   
     map.addLayer(worldImagery);
-    const baseMapSelector = document.querySelector(".basemapselector");
+    map.addLayer(osmLayer);
+    const baseMapSelector = document.querySelector("#basemapselector");
     baseMapSelector.addEventListener("change", function (e) {
         const mapTitle = e.target.value;
         const baseMaps = [osmLayer, worldImagery];
@@ -75,6 +76,7 @@ function Geocoding(map) {
     let searchbox = document.querySelector("#searchbox");
     let searchList = document.querySelector("#placeopetion");
     searchbox.addEventListener("input", (e) => {
+        searchList.style.display = "inline";
         let text = e.target.value;
         clearTimeout(timer);
         timer = setTimeout(() => {
@@ -86,7 +88,7 @@ function Geocoding(map) {
                     let li = document.createElement("li");
                     li.innerHTML = shortNameMaking(name);
                     li.id = f.properties.osm_id;
-
+                    li.className = "list-group-item";
                     li.addEventListener("click", (e) =>
                         clickPlaceListHandeler(e, data.features)
                     );
@@ -96,7 +98,8 @@ function Geocoding(map) {
         }, 500);
     });
   let pinLocation;
-  function clickPlaceListHandeler(e, features) {
+    function clickPlaceListHandeler(e, features) {
+        searchList.style.display = "none";
             let id = e.target.id;
             let feature = features.find((feature) => feature.properties.osm_id == id);
             let coords = ol.proj.transform(
@@ -111,16 +114,10 @@ function Geocoding(map) {
             });
             pinLocation.setStyle(
                 new ol.style.Style({
-                    image: new ol.style.Circle({
-                        radius: 7,
-                        //fill: new ol.style.Fill({
-                        //    color: color,
-                        //}),
-                        stroke: new ol.style.Stroke({
-                            color: "Black",
-                            width: 4
-                        })
-                    })
+                        image: new ol.style.Icon({
+                            src: "../Images/google-maps.png",
+                            scale: 0.09,
+                        }), 
                 })
             );
       pinLayer.getSource().addFeature(pinLocation);
@@ -129,7 +126,7 @@ function Geocoding(map) {
    
 };
 //creat feature from data//
-function creatFeatures(features, color, name) {
+function creatFeatures(features, pin, name) {
 
 
     let listFeatures = [];
@@ -141,6 +138,7 @@ function creatFeatures(features, color, name) {
         let name = data.Name;
         let image = data.Image;
         let rate = data.Rate;
+        let id = data.Id;
       
        
 
@@ -149,7 +147,7 @@ function creatFeatures(features, color, name) {
                 ol.proj.transform([lon, lat], "EPSG:4326", "EPSG:3857")
             ),
             name,
-           
+           id,
             image,
             rate,
 
@@ -170,16 +168,12 @@ function creatFeatures(features, color, name) {
         source: AccomdationLayerSource,
 
         style: new ol.style.Style({
-            image: new ol.style.Circle({
-                radius: 7,
-                //fill: new ol.style.Fill({
-                //    color: color,
-                //}),
-                stroke: new ol.style.Stroke({
-                    color: color,
-                    width: 4
-                })
-            })
+           
+        image: new ol.style.Icon({
+            src: `../Images/${pin}`,
+            scale: 0.09,
+        }), 
+          
         }),
         title:name,
     });
@@ -198,7 +192,7 @@ function creatLayerListHandelCheckBox(map) {
         let layer = layers[i]
         let layername = layers[i].get('title');
 
-        let li = '<li><label><input type="checkbox" checked id="' + i + '" name="' + layername + '" value="' + layername + '">' + layername + '</label></li>'
+        let li = '<li><input class="form-check-input" type="checkbox" checked id="' + i + '" name="' + layername + '" value="' + layername + '"><label class="form-check-label">' + layername + '</label></li>'
 
         document
             .querySelector("#checkbox-list")
@@ -226,9 +220,8 @@ function CreatePopup(map) {
 
     const name = document.querySelector("#name");
     const description = document.querySelector("#description");
-    let image = document.querySelector("#image").getAttribute("src");
-   
-
+    var img = document.querySelector("#image");
+    var btn = document.querySelector("#go");
     map.on("click", (e) => {
         const feature = map.forEachFeatureAtPixel(e.pixel, (feature) => {
             return feature;
@@ -238,9 +231,11 @@ function CreatePopup(map) {
             popup.setPosition(e.coordinate);
             document.querySelector(".pop").style.display = "block";
             name.innerHTML = feature.get("name");
-            description.innerHTML = feature.get("description");
-            image = `"./Images/${feature.get("#image")}"`;
-            console.log(image);
+            
+            btn.href = `Details/${feature.get("id")}`;
+            img.src = `../Images/${feature.get("image")}`;
+            
+       
         } else {
            
             document.querySelector(".pop").style.display = "none";
