@@ -1,5 +1,4 @@
-﻿using EgyptTouristWebSite.Context;
-using EgyptTouristWebSite.Models;
+﻿using EgyptTouristWebSite.Models;
 using EgyptTouristWebSite.Repository.Interfaces;
 
 namespace EgyptTouristWebSite.Repository

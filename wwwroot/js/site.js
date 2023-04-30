@@ -115,7 +115,7 @@ function Geocoding(map) {
             pinLocation.setStyle(
                 new ol.style.Style({
                         image: new ol.style.Icon({
-                            src: "../Images/google-maps.png",
+                            src: "/Images/google-maps.png",
                             scale: 0.09,
                         }), 
                 })
@@ -170,7 +170,7 @@ function creatFeatures(features, pin, name) {
         style: new ol.style.Style({
            
         image: new ol.style.Icon({
-            src: `../Images/${pin}`,
+            src: `/Images/${pin}`,
             scale: 0.09,
         }), 
           
@@ -233,9 +233,8 @@ function CreatePopup(map) {
             name.innerHTML = feature.get("name");
             
             btn.href = `Details/${feature.get("id")}`;
-            img.src = `../Images/${feature.get("image")}`;
+            img.src = `/Images/${feature.get("image")}`;
             
-       
         } else {
            
             document.querySelector(".pop").style.display = "none";

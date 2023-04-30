@@ -8,11 +8,11 @@
      //script to handel the filtered data 
     var accommodations = @Html.Raw(JsonConvert.SerializeObject(Model));
    // var layers = [...map.getLayers().getArray()]
-    console.log(accommodations);
-     labels = document.querySelectorAll('.layers label');
+     labels = document.querySelectorAll('#layers input, label');
     labels.forEach(label => {
      label.remove();
 });
+
 
 
     for (let i = 0; i < accommodations.length; i++) {

@@ -1,5 +1,4 @@
-﻿using EgyptTouristWebSite.Context;
-using EgyptTouristWebSite.Models;
+﻿using EgyptTouristWebSite.Models;
 using EgyptTouristWebSite.repository;
 using EgyptTouristWebSite.Repository;
 using Microsoft.AspNetCore.Mvc;

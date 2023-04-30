@@ -1,4 +1,5 @@
 ﻿using EgyptTouristWebSite.Models;
+using EgyptTouristWebSite.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -14,7 +15,8 @@ namespace EgyptTouristWebSite.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            HomeViewModel model = new HomeViewModel();
+            return View(model);
         }
 
         public IActionResult Privacy()

@@ -1,5 +1,4 @@
-﻿using EgyptTouristWebSite.Context;
-using EgyptTouristWebSite.Models;
+﻿using EgyptTouristWebSite.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace EgyptTouristWebSite.ViewModel

@@ -1,6 +1,5 @@
 ﻿using EgyptTouristWebSite.Models;
 using EgyptTouristWebSite.Repository.Interfaces;
-using EgyptTouristWebSite.Context;
 namespace EgyptTouristWebSite.Repository
 {
     public class TourGuideRepositry : IRepo<TourGuide>

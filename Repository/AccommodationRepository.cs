@@ -1,5 +1,4 @@
-﻿using EgyptTouristWebSite.Context;
-using EgyptTouristWebSite.Models;
+﻿using EgyptTouristWebSite.Models;
 using EgyptTouristWebSite.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;

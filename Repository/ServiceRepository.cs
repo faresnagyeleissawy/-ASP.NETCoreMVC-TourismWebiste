@@ -1,7 +1,5 @@
-﻿using EgyptTouristWebSite.Context;
-using EgyptTouristWebSite.Models;
+﻿using EgyptTouristWebSite.Models;
 using EgyptTouristWebSite.Repository.Interfaces;
-using EgyptTouristWebSite.ViewModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace EgyptTouristWebSite.Repository
